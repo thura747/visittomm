@@ -1,0 +1,39 @@
+#header-page .logo{
+    font-size: 30px;
+}
+
+#search-trip .v2mm-form-elements {
+    margin-top: 24px;
+}
+
+#search-trip .form-group .form-elements {
+    float: left;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.awe-search-tabs {
+    border-radius: 6px;
+    margin-top: 0px;
+    position: relative;
+    z-index: 9999;
+}
+#search-trip {
+    padding: 0;
+}
+
+
+#search- .form-actions input{
+    background-color: #0091ea;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.3) inset;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    padding: 8px 15px 10px;
+    position: relative;
+    transition: all 0.3s ease 0s;
+}
