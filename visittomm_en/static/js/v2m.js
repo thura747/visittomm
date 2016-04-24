@@ -5,17 +5,14 @@ function toggler(divId) {
 }
 
 $(function() {
-  $( "#origin" ).catcomplete({
-    source: "/api/get_cities/",
-    minLength: 0,
-  });
-
-
-$(function() {
-  $( "#destination" ).catcomplete({
-    source: "/api/get_cities/",
-    minLength: 0,
-  });
-
-
+    $( "#origin" ).catcomplete({
+        source: "/api/get_cities/",
+        minLength: 0,
+    });
+    $( "#destination" ).catcomplete({
+        source: "/api/get_cities/",
+        minLength: 0,
+    });
 });
+
+

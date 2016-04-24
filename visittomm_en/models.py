@@ -34,6 +34,9 @@ class RegionsStates(models.Model):
     name = models.CharField(max_length=200)
     code = models.CharField(max_length=200, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Cities(models.Model):
     name = models.CharField(max_length=200)
@@ -41,10 +44,10 @@ class Cities(models.Model):
     postal_code = models.CharField(max_length=200)
     # description = models.TextField()
     # content = HTMLField()
-    content = RichTextField()
+    content = RichTextField(null=True)
 
-    lat = models.CharField(max_length=20)
-    lon = models.CharField(max_length=20)
+    lat = models.CharField(max_length=20, null=True)
+    lon = models.CharField(max_length=20, null=True)
 
     i_airport = models.BooleanField(default=False)     # International airports
     d_airport = models.BooleanField(default=False)     # Domestic airports
@@ -54,7 +57,32 @@ class Cities(models.Model):
     city = models.BooleanField(default=False)   # city of Region or State
     publish = models.BooleanField(default=False)
 
-    region_id = models.ForeignKey(RegionsStates, on_delete=models.CASCADE, null=True, related_name='cities_region_id')
+    region_id = models.ForeignKey(RegionsStates, null=True, related_name='cities_region_id')
+
+    # def __str__(self):
+    #     return self.name
+
+
+class Destinations(models.Model):
+    name = models.CharField(max_length=200)
+    content = RichTextField(null=True)
+
+    lat = models.CharField(max_length=20, null=True)
+    lon = models.CharField(max_length=20, null=True)
+
+    i_airport = models.BooleanField(default=False)     # International airports
+    d_airport = models.BooleanField(default=False)     # Domestic airports
+    bus = models.BooleanField(default=False)
+    cruise = models.BooleanField(default=False)
+    car = models.BooleanField(default=False)
+    city = models.BooleanField(default=False)   # city of Region or State
+    publish = models.BooleanField(default=False)
+
+    region_id = models.ForeignKey(RegionsStates, null=True, related_name='destination_region_id')
+    city_id = models.ForeignKey(Cities, null=True, related_name='destination_city_id')
+
+    def __str__(self):
+        return self.name
 
 
 class Companies(models.Model):
@@ -71,7 +99,7 @@ class Companies(models.Model):
 
     created_by = models.ForeignKey('auth.User', null=True, related_name='company_created_by')
     updated_by = models.ForeignKey('auth.User', null=True, related_name='company_updated_by')
-    user_ids = models.ManyToManyField('auth.User', null=True, related_name='user_ids')
+    user_ids = models.ManyToManyField('auth.User', related_name='user_ids')
     # agent_ids = models.ManyToManyField(Agencies)
 
     def __str__(self):
@@ -93,10 +121,10 @@ class Packages(models.Model):
     created_by = models.ForeignKey('auth.User', null=True, related_name='packages_created_by')
     updated_by = models.ForeignKey('auth.User', null=True, related_name='packages_updated_by')
 
-    company_id = models.ForeignKey(Companies, on_delete=models.CASCADE, related_name='company_id')
+    company_id = models.ForeignKey(Companies, related_name='company_id')
 
-    origin = models.ForeignKey(Cities, null=True, related_name='origin_city_id')
-    destination = models.ForeignKey(Cities, null=True, related_name='destination_city_id')
+    origin = models.ForeignKey(Cities, null=True, related_name='package_origin_city_id')
+    destination = models.ForeignKey(Cities, null=True, related_name='package_destination_city_id')
 
     def __str__(self):
         return self.title

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 /*! jQuery UI - v1.11.4 - 2015-03-11
 * http://jqueryui.com
 * Includes: core.css, accordion.css, autocomplete.css, button.css, datepicker.css, dialog.css, draggable.css, menu.css, progressbar.css, resizable.css, selectable.css, selectmenu.css, slider.css, sortable.css, spinner.css, tabs.css, tooltip.css, theme.css
@@ -845,7 +846,7 @@ body .ui-tooltip {
 }
 .ui-widget-content {
 	border: 1px solid #aaaaaa;
-	background: #ffffff url("images/ui-bg_flat_75_ffffff_40x100.png") 50% 50% repeat-x;
+	background: #ffffff url("{% static 'images/ui-bg_flat_75_ffffff_40x100.png' %}") 50% 50% repeat-x;
 	color: #222222;
 }
 .ui-widget-content a {
@@ -853,7 +854,7 @@ body .ui-tooltip {
 }
 .ui-widget-header {
 	border: 1px solid #aaaaaa;
-	background: #cccccc url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x;
+	background: #cccccc url("{% static 'images/ui-bg_highlight-soft_75_cccccc_1x100.png' %}") 50% 50% repeat-x;
 	color: #222222;
 	font-weight: bold;
 }

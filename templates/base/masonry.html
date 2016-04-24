@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <section class="masonry-section-demo">
     <div class="container">
         <div class="destination-grid-content">
@@ -7,10 +8,37 @@
             <div class="row">
                 <div class="awe-masonry">
                     <!-- GALLERY ITEM -->
+                    {% include "en/test.html" %}
+                    <!-- END / GALLERY ITEM -->
+
+
+                    <!-- GALLERY ITEM -->
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/1.jpg" alt="">
+                                <img src="{% static 'images/img/3.jpg' %}" alt="">
+                            </div>
+                        </a>
+                        <div class="item-title">
+                            <h2><a href="#">Venice</a></h2>
+                            <div class="item-cat">
+                                <ul>
+                                    <li><a href="#">Italy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item-available">
+                            <span class="count">2341</span>
+                            available hotel
+                        </div>
+                    </div>
+                    <!-- END / GALLERY ITEM -->
+
+                    <!-- GALLERY ITEM -->
+                    <div class="awe-masonry__item">
+                        <a href="#">
+                            <div class="image-wrap image-cover">
+                                <img src="{% static 'images/img/1.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">
@@ -31,7 +59,7 @@
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/2.jpg" alt="">
+                                <img src="{% static 'images/img/2.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">
@@ -52,28 +80,7 @@
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/3.jpg" alt="">
-                            </div>
-                        </a>
-                        <div class="item-title">
-                            <h2><a href="#">Venice</a></h2>
-                            <div class="item-cat">
-                                <ul>
-                                    <li><a href="#">Italy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="item-available">
-                            <span class="count">2341</span>
-                            available hotel
-                        </div>
-                    </div>
-                    <!-- END / GALLERY ITEM -->
-                    <!-- GALLERY ITEM -->
-                    <div class="awe-masonry__item">
-                        <a href="#">
-                            <div class="image-wrap image-cover">
-                                <img src="images/img/4.jpg" alt="">
+                                <img src="{% static 'images/img/4.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">
@@ -94,7 +101,7 @@
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/5.jpg" alt="">
+                                <img src="{% static 'images/img/5.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">
@@ -115,7 +122,7 @@
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/6.jpg" alt="">
+                                <img src="{% static 'images/img/6.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">
@@ -136,7 +143,7 @@
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/7.jpg" alt="">
+                                <img src="{% static 'images/img/7.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">
@@ -157,7 +164,7 @@
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/8.jpg" alt="">
+                                <img src="{% static 'images/img/8.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">
@@ -178,7 +185,7 @@
                     <div class="awe-masonry__item">
                         <a href="#">
                             <div class="image-wrap image-cover">
-                                <img src="images/img/9.jpg" alt="">
+                                <img src="{% static 'images/img/9.jpg' %}" alt="">
                             </div>
                         </a>
                         <div class="item-title">

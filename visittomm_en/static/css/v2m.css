@@ -1,5 +1,5 @@
 #header-page .logo{
-    font-size: 30px;
+    font-size: 1.5em;
 }
 
 #search-trip .v2mm-form-elements {
@@ -36,4 +36,48 @@
     padding: 8px 15px 10px;
     position: relative;
     transition: all 0.3s ease 0s;
+}
+
+
+
+.hd{
+    display: none;
+}
+
+.expand-icon {
+    background: rgba(0, 0, 0, 0) url("/static/images/location.png") repeat scroll 0 0;
+    cursor: pointer;
+    height: 14px;
+    margin-right: 0 !important;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    width: 14px;
+}
+
+
+.flyout-container {
+    display: none;
+    left: 0;
+    position: relative;
+    top: 0;
+    z-index: 10000;
+}
+
+.flyout-container .flyout-wrapper {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #c7c7c7;
+    border-radius: 2px;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    top: 5px;
+}
+
+.awe-search-tabs{
+    border-radius: 6px;
+    margin-top: 0;
+    position: relative;
+    z-index: 0;
 }

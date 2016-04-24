@@ -1,9 +1,23 @@
-{% for post in posts %}
-    <div class="post">
-        <div class="date">
-            {{ post.published_date }}
+{% load staticfiles %}
+{% for dest in destinations %}
+    <div class="awe-masonry__item">
+        <a href="#">
+            <div class="image-wrap image-cover">
+                <img src="{% static 'images/img/3.jpg' %}" alt="">
+            </div>
+        </a>
+        <div class="item-title">
+            <h2><a href="#">{{ dest.name }}</a></h2>
+            <div class="item-cat">
+                <ul>
+                    <li><a href="#">{{ dest.region_id.name }}</a></li>
+                    <li><a href="#">{{ dest.city_id.name }}</a></li>
+                </ul>
+            </div>
         </div>
-        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-        <p>{{ post.text|linebreaks }}</p>
+        <div class="item-available">
+            <span class="count">2341</span>
+            available hotel
+        </div>
     </div>
 {% endfor %}
