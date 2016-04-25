@@ -1,0 +1,140 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<section class="your-destinations-section-demo">
+    <div class="container">
+        <div class="your-destinations">
+            <div class="your-destionations__top">
+                <div class="title">
+                    <h2>Your Destinations</h2>
+                </div>
+                <!--<div class="your-destinations__bar">-->
+                    <!--<div class="view-switcher">-->
+                        <!--<div class="view-item view-active">-->
+                            <!--<a href="destinations-list.html">-->
+                                <!--<i class="awe-icon awe-icon-list"></i>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                        <!--<div class="view-item">-->
+                            <!--<a href="destinations-grid.html">-->
+                                <!--<i class="awe-icon awe-icon-grid"></i>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="order">-->
+                        <!--<select class="orderby awe-select">-->
+                            <!--<option>Best Match</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+
+            <div class="destination-list__content">
+                <!-- ITEM -->
+                {% for dest in destinations %}
+                <div class="destinations-item">
+                    <div class="item-media">
+                        <div class="image-cover">
+                            <img src="images/img/2.jpg" alt="">
+                        </div>
+                        <div class="item-cat">
+                            <ul>
+                                <li><a href="#">{{ dest.region_id.name|striptags }}</a></li>
+                                <li><a href="#">{{ dest.city_id.name|striptags }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <div class="item-title">
+                            <h2>
+                                <a href="/en/destinations/detail/{{ dest.id }}">{{ dest.name|striptags }}</a>
+                            </h2>
+                        </div>
+                        <div class="item-description">
+                            <p>{{ dest.content|striptags }}</p>
+                        </div>
+                        <div class="item-footer">
+                            <ul>
+                                {% if dest.i_airport == True %}
+                                <li>
+                                    <h6>Int'l Flight</h6>
+                                    <p>
+                                        <i class="awe-icon awe-icon-plane"></i>
+                                        <!--<span class="count">089</span>-->
+                                    </p>
+                                </li>
+                                {% endif %}
+                                {% if dest.d_airport == True %}
+                                <li>
+                                    <h6>Domestic Flight</h6>
+                                    <p>
+                                        <i class="awe-icon awe-icon-plane"></i>
+                                        <!--<span class="count">089</span>-->
+                                    </p>
+                                </li>
+                                {% endif %}
+
+                                {% if dest.train == True %}
+                                <li>
+                                    <h6>Train</h6>
+                                    <p>
+                                        <i class="awe-icon awe-icon-train"></i>
+                                        <!--<span class="count">589</span>-->
+                                    </p>
+                                </li>
+                                {% endif %}
+                                <!--<li>-->
+                                    <!--<h6>Hotel</h6>-->
+                                    <!--<p>-->
+                                        <!--<i class="awe-icon awe-icon-hotel"></i>-->
+                                        <!--<span class="count">8632</span>-->
+                                    <!--</p>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<h6>Attraction</h6>-->
+                                    <!--<p>-->
+                                        <!--<i class="awe-icon awe-icon-attraction"></i>-->
+                                        <!--<span class="count">25</span>-->
+                                    <!--</p>-->
+                                <!--</li>-->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-price-more">
+                        <div class="price">
+                            <!--one night from-->
+                            <!--<span class="amount">$200</span>-->
+                        </div>
+                        <a href="/en/destinations/detail/{{ dest.id }}" class="awe-btn">more</a>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- END / ITEM -->
+            </div>
+
+
+            <!-- PAGINATION -->
+            <div class="page__pagination text-center">
+                {% if destinations.has_previous %}
+                    <a href="?page={{ destinations.previous_page_number }}" class="pagination-next"><i class="fa fa-caret-left"></i></a>
+                {% endif %}
+
+                {% for dest_page in page_cnt %}
+                    {% if destinations.number == dest_page %}
+                        <span class="current">{{ dest_page }}</span>
+                    {% else %}
+                        <a href="?page={{ dest_page }}">{{ dest_page }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if destinations.has_next %}
+                    <a href="?page={{ destinations.next_page_number }}" class="pagination-next"><i class="fa fa-caret-right"></i></a>
+                {% endif %}
+            </div>
+            <!-- END / PAGINATION -->
+        </div>
+    </div>
+</section>
+{% endblock %}

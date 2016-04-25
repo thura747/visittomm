@@ -1,14 +1,29 @@
 <nav class="navigation awe-navigation" data-responsive="1200">
     <ul class="menu-list">
-        <li class="menu-item-has-children current-menu-parent">
-            <a href="en/">Home</a>
+         {% if current_menu == 'Index' %}
+            <li class="menu-item-has-children current-menu-parent">
+        {% else %}
+            <li class="menu-item-has-children">
+        {% endif %}
+            <a href="/en/">Home</a>
         </li>
-        <li class="menu-item-has-children">
-            <a href="contact.html">Contact</a>
-            <ul class="sub-menu">
-                <li><a href="contact.html">Light</a></li>
-                <li><a href="contact-dark.html">Dark</a></li>
-            </ul>
+        {% if current_menu == 'Destinations' %}
+        <li class="menu-item-has-children current-menu-parent">
+        {% else %}
+            <li class="menu-item-has-children">
+        {% endif %}
+            <a href="/en/destinations">Destinations</a>
+        </li>
+        {% if current_menu == 'Contact' %}
+        <li class="menu-item-has-children current-menu-parent">
+        {% else %}
+            <li class="menu-item-has-children">
+        {% endif %}
+            <a href="/en/contact/">Contact</a>
+            <!--<ul class="sub-menu">-->
+                <!--<li><a href="contact.html">Light</a></li>-->
+                <!--<li><a href="contact-dark.html">Dark</a></li>-->
+            <!--</ul>-->
         </li>
     </ul>
 </nav>

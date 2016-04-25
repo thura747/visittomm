@@ -9,6 +9,8 @@ from django.views.generic import View
 from django.views.generic.edit import FormView
 from django.template import Context, Template, RequestContext, loader
 import json
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 from .models import Post2
 
@@ -30,11 +32,113 @@ class Index(View):
 
         destinations = Destinations.objects.order_by('id')[:9]
         params["destinations"] = destinations
-        return render(request, 'en/index.html', {'destinations': destinations})
+        current_menu = 'Index'
+        return render(request, 'en/index.html', {'destinations': destinations, 'current_menu': current_menu})
 
     def post(self, request):
         return HttpResponse('I am called from a post Request')
 
+
+class Contact(View):
+
+    def get(self, request):
+        current_menu = 'Contact'
+        return render(request, 'en/contact.html', {'current_menu': current_menu})
+
+    def post(self, request):
+        return HttpResponse('I am called from a post Request')
+
+
+class DestinationsList(View):
+
+    def get(self, request):
+        params = {}
+        destinations = Destinations.objects.all().order_by('id')
+        # params["destinations"] = destinations
+        paginator = Paginator(destinations, 10)  # Show 25 contacts per page
+
+        page = request.GET.get('page')
+        try:
+            destinations = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            destinations = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            destinations = paginator.page(paginator.num_pages)
+
+        page_cnt = range(1, paginator.num_pages + 1)
+        current_menu = 'Destinations'
+        return render(request, 'en/destinations/destination_list.html',
+                      {'destinations': destinations, 'page_cnt': page_cnt, 'current_menu': current_menu})
+
+    def post(self, request):
+        return HttpResponse('I am called from a post Request')
+
+
+class DestinationsListByCity(View):
+
+    def get(self, request, city_name):
+        city = Cities.objects.filter(name=city_name)
+        regions_states = RegionsStates.objects.filter(id=city)
+        destinations = Destinations.objects.filter(region_id=regions_states)
+        paginator = Paginator(destinations, 10)  # Show 25 contacts per page
+
+        page = request.GET.get('page')
+        try:
+            destinations = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            destinations = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            destinations = paginator.page(paginator.num_pages)
+
+        page_cnt = range(1, paginator.num_pages + 1)
+        current_menu = 'Destinations'
+        return render(request, 'en/destinations/destination_list.html',
+                      {'destinations': destinations, 'page_cnt': page_cnt, 'current_menu': current_menu})
+
+    def post(self, request):
+        return HttpResponse('I am called from a post Request')
+
+
+class DestinationsListByRegion(View):
+
+    def get(self, request, region_name):
+        regions_states = RegionsStates.objects.filter(name=region_name)
+        destinations = Destinations.objects.filter(region_id=regions_states)
+        paginator = Paginator(destinations, 10)  # Show 25 contacts per page
+
+        page = request.GET.get('page')
+        try:
+            destinations = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            destinations = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            destinations = paginator.page(paginator.num_pages)
+
+        page_cnt = range(1, paginator.num_pages + 1)
+        current_menu = 'Destinations'
+        return render(request, 'en/destinations/destination_list.html',
+                      {'destinations': destinations, 'page_cnt': page_cnt, 'current_menu': current_menu})
+
+    def post(self, request):
+        return HttpResponse('I am called from a post Request')
+
+
+class DestinationDetail(View):
+
+    def get(self, request, pk):
+        destinations = get_object_or_404(Destinations, id=pk)
+        current_menu = 'Destinations'
+        return render(request, 'en/destinations/destinations_detail.html',
+                      {'destinations': destinations, 'current_menu': current_menu})
+
+    def post(self, request):
+        return HttpResponse('I am called from a post Request')
 
 def post_list(request):
     posts = Post2.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -70,22 +174,16 @@ def get_cities(request):
     return HttpResponse(data, mimetype)
 
 
+class Trips(View):
+    def get(self, request):
+        params = {}
+        params["name"] = "Django"
+        return render(request, 'en/destinations/trips.html')
 
-from django.template import RequestContext
-def ajax_mymodel_list(request):
-    """ returns data displayed at autocomplete list -
-    this function is accessed by AJAX calls
-    """
-    limit = 10
-    query = request.GET.get('q', None)
-    # it is up to you how query looks
-    if query:
-        qargs = [django.db.models.Q(name__istartswith=query)]
+    def post(self, request):
+        return HttpResponse('I am called from a post Request')
 
-    instances = Cities.objects.filter(django.db.models.Q(*qargs))[:limit]
 
-    results = ""
-    for item in instances:
-        results += "%s|%s \n" %(item.pk,item.name)
-
-    return HttpResponse(results)
+class TripDetail(View):
+    def get(self, request):
+        return render(request, 'en/destinations/trip_detail.html')

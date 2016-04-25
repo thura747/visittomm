@@ -1,22 +1,23 @@
 {% extends 'base/base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 
-        <!-- HERO SECTION -->
-        {% include "base/slide_show.html" %}
-        <!-- END / HERO SECTION -->
+    <!-- HERO SECTION -->
+    {% include "base/slide_show.html" %}
+    <!-- END / HERO SECTION -->
 
+    <!-- SEARCH TABS -->
+    {% include "base/search_tabs.html" %}
+    <!-- END / SEARCH TABS -->
 
-        <!-- SEARCH TABS -->
-        {% include "base/search_tabs.html" %}
-        <!-- END / SEARCH TABS -->
+    <!-- MASONRY -->
+    {% include "base/masonry.html" %}
+    <!-- END / MASONRY -->
 
-
-        <!-- MASONRY -->
-        {% include "base/masonry.html" %}
-        <!-- END / MASONRY -->
-
-        {% include "base/hot_trips.html" %}
-
+    {% include "base/hot_trips.html" %}
 {% endblock %}
 
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}

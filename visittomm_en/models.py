@@ -59,8 +59,8 @@ class Cities(models.Model):
 
     region_id = models.ForeignKey(RegionsStates, null=True, related_name='cities_region_id')
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return self.name
 
 
 class Destinations(models.Model):
@@ -72,6 +72,7 @@ class Destinations(models.Model):
 
     i_airport = models.BooleanField(default=False)     # International airports
     d_airport = models.BooleanField(default=False)     # Domestic airports
+    train = models.BooleanField(default=False)
     bus = models.BooleanField(default=False)
     cruise = models.BooleanField(default=False)
     car = models.BooleanField(default=False)
