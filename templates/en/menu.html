@@ -14,6 +14,15 @@
         {% endif %}
             <a href="/en/destinations">Destinations</a>
         </li>
+
+        {% if current_menu == 'Trips' %}
+        <li class="menu-item-has-children current-menu-parent">
+        {% else %}
+            <li class="menu-item-has-children">
+        {% endif %}
+            <a href="/en/trips">Trips</a>
+        </li>
+
         {% if current_menu == 'Contact' %}
         <li class="menu-item-has-children current-menu-parent">
         {% else %}

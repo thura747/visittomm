@@ -8,6 +8,8 @@ from django import forms
 
 class IndexSearchTripForm(forms.Form):
     origin = forms.CharField(label='Enter a keyword to search for',
-                             widget=forms.TextInput(attrs={'size': 32, 'class': 'form-control search-query'}))
+                             widget=forms.TextInput(attrs={'size': 32, 'class': 'form-control search-query'}),
+                             initial='Yangon')
     destinations = forms.CharField(label='Enter a keyword to search for',
-                                   widget=forms.TextInput(attrs={'size': 32, 'class': 'form-control search-query'}))
+                                   widget=forms.TextInput(attrs={'size': 32, 'class': 'form-control search-query'}),
+                                   initial='Bagan')

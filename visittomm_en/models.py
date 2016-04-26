@@ -113,8 +113,8 @@ class Companies(models.Model):
 class Packages(models.Model):
     # author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
-    rank = models.CharField(max_length=200)
-    description = models.TextField()
+    rank = models.CharField(max_length=200, null=True)
+    description = RichTextField(null=True)
 
     created_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
@@ -124,8 +124,14 @@ class Packages(models.Model):
 
     company_id = models.ForeignKey(Companies, related_name='company_id')
 
-    origin = models.ForeignKey(Cities, null=True, related_name='package_origin_city_id')
-    destination = models.ForeignKey(Cities, null=True, related_name='package_destination_city_id')
+    origin = models.ForeignKey(Cities, related_name='package_origin_city_id')
+    destination = models.ForeignKey(Cities, related_name='package_destination_city_id')
+
+    sights_stops = models.IntegerField(max_length=3, null=True)
+    time_length = models.CharField(max_length=200, null=True)
+    type = models.CharField(max_length=200, null=True)
+    transport_includes = models.CharField(max_length=200, null=True)
+    language_spoken = models.CharField(max_length=200, null=True)
 
     def __str__(self):
         return self.title

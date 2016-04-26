@@ -62,7 +62,7 @@
                     zoom: _this.options.zoom,
                     scrollwheel: _this.options.scrollwheel,
                     center:  new google.maps.LatLng(_this.options.center[0], _this.options.center[1]),
-                    styles: $.styles[_this.options.style]
+//                    styles: $.styles[_this.options.style]
                 };
 
                 // Check autoCenter
