@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
+from django.http import Http404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import View
 from django.views.generic.edit import FormView
@@ -54,8 +55,7 @@ class DestinationsList(View):
     def get(self, request):
         params = {}
         destinations = Destinations.objects.all().order_by('id')
-        # params["destinations"] = destinations
-        paginator = Paginator(destinations, 10)  # Show 25 contacts per page
+        paginator = Paginator(destinations, 10)  # Show 10 contacts per page
 
         page = request.GET.get('page')
         try:
@@ -67,10 +67,11 @@ class DestinationsList(View):
             # If page is out of range (e.g. 9999), deliver last page of results.
             destinations = paginator.page(paginator.num_pages)
 
-        page_cnt = range(1, paginator.num_pages + 1)
-        current_menu = 'Destinations'
-        return render(request, 'en/destinations/destination_list.html',
-                      {'destinations': destinations, 'page_cnt': page_cnt, 'current_menu': current_menu})
+        params["destinations"] = destinations
+        params["page_cnt"] = range(1, paginator.num_pages + 1)
+        params["current_menu"] = 'Destinations'
+        params["breadcrumb"] = "country"
+        return render(request, 'en/destinations/destination_list.html', params)
 
     def post(self, request):
         return HttpResponse('I am called from a post Request')
@@ -79,9 +80,14 @@ class DestinationsList(View):
 class DestinationsListByCity(View):
 
     def get(self, request, city_name):
-        city = Cities.objects.filter(name=city_name)
-        regions_states = RegionsStates.objects.filter(id=city)
-        destinations = Destinations.objects.filter(region_id=regions_states)
+        params = {}
+        try:
+            city = Cities.objects.get(name=city_name)
+        except Cities.DoesNotExist:
+            raise Http404('"' + city_name + '" city does not exist')
+
+        regions_states = RegionsStates.objects.get(id=city.id)
+        destinations = Destinations.objects.filter(region_id=regions_states.id)
         paginator = Paginator(destinations, 10)  # Show 25 contacts per page
 
         page = request.GET.get('page')
@@ -94,10 +100,13 @@ class DestinationsListByCity(View):
             # If page is out of range (e.g. 9999), deliver last page of results.
             destinations = paginator.page(paginator.num_pages)
 
-        page_cnt = range(1, paginator.num_pages + 1)
-        current_menu = 'Destinations'
-        return render(request, 'en/destinations/destination_list.html',
-                      {'destinations': destinations, 'page_cnt': page_cnt, 'current_menu': current_menu})
+        params["destinations"] = destinations
+        params["page_cnt"] = range(1, paginator.num_pages + 1)
+        params["current_menu"] = 'Destinations'
+        params["breadcrumb"] = "city"
+        params["city_name"] = city.name
+        params["region"] = regions_states.name
+        return render(request, 'en/destinations/destination_list.html', params)
 
     def post(self, request):
         return HttpResponse('I am called from a post Request')
@@ -106,8 +115,16 @@ class DestinationsListByCity(View):
 class DestinationsListByRegion(View):
 
     def get(self, request, region_name):
-        regions_states = RegionsStates.objects.filter(name=region_name)
+        params = {}
+
+        try:
+            regions_states = RegionsStates.objects.get(name=region_name)
+        except RegionsStates.DoesNotExist:
+            raise Http404('"' + region_name + '" region does not exist')
+
         destinations = Destinations.objects.filter(region_id=regions_states)
+
+
         paginator = Paginator(destinations, 10)  # Show 25 contacts per page
 
         page = request.GET.get('page')
@@ -120,10 +137,12 @@ class DestinationsListByRegion(View):
             # If page is out of range (e.g. 9999), deliver last page of results.
             destinations = paginator.page(paginator.num_pages)
 
-        page_cnt = range(1, paginator.num_pages + 1)
-        current_menu = 'Destinations'
-        return render(request, 'en/destinations/destination_list.html',
-                      {'destinations': destinations, 'page_cnt': page_cnt, 'current_menu': current_menu})
+        params["destinations"] = destinations
+        params["page_cnt"] = range(1, paginator.num_pages + 1)
+        params["current_menu"] = 'Destinations'
+        params["breadcrumb"] = "region"
+        params["region"] = regions_states.name
+        return render(request, 'en/destinations/destination_list.html', params)
 
     def post(self, request):
         return HttpResponse('I am called from a post Request')

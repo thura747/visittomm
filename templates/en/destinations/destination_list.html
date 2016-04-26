@@ -3,6 +3,29 @@
 
 {% block content %}
 
+    <!-- BREADCRUMB -->
+    <section>
+        <div class="container">
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="/en/">Home</a></li>
+                    <li><a href="/en/destinations/">Destinations</a></li>
+                    {% if breadcrumb == 'country' %}
+                        <li><span>Myanmar</span></li>
+                    {% elif breadcrumb == 'region' %}
+                        <li><a href="/en/destinations/">Myanmar</a></li>
+                        <li><span>{{ region }}</span></li>
+                    {% elif breadcrumb == 'city' %}
+                        <li><a href="/en/destinations/">Myanmar</a></li>
+                        <li><a href="/en/destinations/regional/{{ region }}">{{ region }}</a></li>
+                        <li><span>{{ city_name }}</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- BREADCRUMB -->
+
 <section class="your-destinations-section-demo">
     <div class="container">
         <div class="your-destinations">
