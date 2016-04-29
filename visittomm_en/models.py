@@ -127,7 +127,7 @@ class Packages(models.Model):
     origin = models.ForeignKey(Cities, related_name='package_origin_city_id')
     destination = models.ForeignKey(Cities, related_name='package_destination_city_id')
 
-    sights_stops = models.IntegerField(max_length=3, null=True)
+    sights_stops = models.IntegerField(null=True)
     time_length = models.CharField(max_length=200, null=True)
     type = models.CharField(max_length=200, null=True)
     transport_includes = models.CharField(max_length=200, null=True)

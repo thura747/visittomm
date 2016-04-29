@@ -16,10 +16,19 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
+
     url(r'', include('blog.urls')),
     url(r'', include('visittomm_en.urls')),
 
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
+    # patterns('', ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]
