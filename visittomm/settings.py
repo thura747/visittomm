@@ -45,12 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
 
-
     'ckeditor',
     'ckeditor_uploader',
 
     'blog',
+
     'visittomm_en',
+    'visittomm_en.templatetags.menus',
+
+
+
 ]
 
 MIDDLEWARE_CLASSES = [

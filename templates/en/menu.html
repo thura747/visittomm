@@ -1,3 +1,4 @@
+{% load menus %}
 <nav class="navigation awe-navigation" data-responsive="1200">
     <ul class="menu-list">
          {% if current_menu == 'Index' %}
@@ -24,7 +25,7 @@
         </li>
 
         {% if current_menu == 'Contact' %}
-        <li class="menu-item-has-children current-menu-parent">
+            <li class="menu-item-has-children current-menu-parent">
         {% else %}
             <li class="menu-item-has-children">
         {% endif %}
@@ -33,6 +34,10 @@
                 <!--<li><a href="contact.html">Light</a></li>-->
                 <!--<li><a href="contact-dark.html">Dark</a></li>-->
             <!--</ul>-->
+        </li>
+
+        <li class="menu-item-has-children current-menu-parent">
+            <a href="#">123 {{ menus }} - {{ myvar }} 456</a>
         </li>
     </ul>
 </nav>

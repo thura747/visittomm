@@ -1,0 +1,9 @@
+../dj_database_url.py
+../dj_database_url.pyc
+./
+pbr.json
+SOURCES.txt
+top_level.txt
+not-zip-safe
+PKG-INFO
+dependency_links.txt

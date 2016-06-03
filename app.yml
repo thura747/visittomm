@@ -1,0 +1,22 @@
+application: expanded-run-130223  # Change to your actual GAE project code name
+version: 0-0-1  # Update with your version number
+runtime: python27
+api_version: 1
+threadsafe: yes
+instance_class: F1
+
+handlers:
+- url: /.*
+  script: visittomm.wsgi.application  # Update with project name folder
+
+skip_files:
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*~$
+- ^README\..*
+- \.gitignore
+- ^\.git/.*
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: 'visittomm.settings' # Update with project name folder
