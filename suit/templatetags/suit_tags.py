@@ -14,7 +14,7 @@ try:
     # Django 1.9
     from django.contrib.admin.utils import lookup_field
 except ImportError:
-    from django.contrib.admin.util import lookup_field
+    from django.contrib.admin.utils import lookup_field
 
 register = template.Library()
 
@@ -108,7 +108,7 @@ if django_version < 1.9:
 
 if django_version < 1.5:
     # Add admin_urlquote filter to support Django 1.4
-    from django.contrib.admin.util import quote
+    from django.contrib.admin.utils import quote
     @register.filter
     def admin_urlquote(value):
         return quote(value)
